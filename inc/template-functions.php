@@ -35,3 +35,17 @@ function medsystem_light_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'medsystem_light_pingback_header' );
+
+function special_nav_class( $classes, $item ){
+
+	$classes[] = 'navbar-item';
+
+	if ( in_array('current-menu-item', $classes) ){
+
+		$classes[] = 'active';
+	}
+
+	return $classes;
+}
+
+add_filter( 'nav_menu_css_class' , 'special_nav_class' , 10 , 2 );

@@ -9,6 +9,8 @@
  * @package MedSystem_-_Light
  */
 
+$date = isset($_POST['data']) ? $_POST['data'] : 'esse_mes';
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -26,34 +28,49 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'medsystem-light' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$medsystem_light_description = get_bloginfo( 'description', 'display' );
-			if ( $medsystem_light_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $medsystem_light_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'medsystem-light' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+		<nav id="site-navigation" class="main-navigation navbar is-dark" role="navigation" aria-label="main navigation">
+			<div class="site-branding navbar-brand pl-1">
+				<?php
+				the_custom_logo();
+				$medsystem_light_description = get_bloginfo( 'description', 'display' );
+				if ( $medsystem_light_description || is_customize_preview() ) :
+					?>
+					<div class="site-title navbar-item">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+						<span class="sep">&nbsp;&nbsp;</span>
+						<span class="site-description"><?php echo $medsystem_light_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+					</div>
+				<?php endif; ?>
+				<a role="button" class="navbar-burger menu-toggle" aria-label="menu" aria-expanded="false">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+			    </a>
+			</div>
+			<div class="navbar-end">
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' 	=> 'menu-1',
+						'menu_id'        	=> 'primary-menu',
+						'container'			=> false
+					)
+				);
+				if ( is_archive() ) {
+				?>
+				<form id="filter_data" class="navbar-item" method="POST">
+					<select id="data" class="p-1" name="data">
+						<option value="todos" <?= 'todos' == $date ? 'selected' : ''; ?>><?php _e( 'all', 'medsystem-light' ); ?></option>
+						<option value="esse_mes" <?= 'esse_mes' == $date ? 'selected' : ''; ?>><?php _e( 'current month', 'medsystem-light' ); ?></option>
+						<option value="hoje" <?= 'hoje' == $date ? 'selected' : ''; ?>><?php _e( 'today', 'medsystem-light' ); ?></option>
+						<option value="ontem" <?= 'ontem' == $date ? 'selected' : ''; ?>><?php _e( 'yesterday', 'medsystem-light' ); ?></option>
+						<option value="amanha" <?= 'amanha' == $date ? 'selected' : ''; ?>><?php _e( 'tomorrow', 'medsystem-light' ); ?></option>
+					</select>
+				</form>
+				<?php
+				}
+				?>
+			</div>
+		</nav>
+	</header>
