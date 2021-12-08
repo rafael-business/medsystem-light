@@ -30,6 +30,7 @@ $response = wp_remote_request( $url, array('method' => 'GET' ) );
  
 if ( wp_remote_retrieve_response_code( $response ) != 200 || ( empty( wp_remote_retrieve_body( $response ) ) ) ){
     //http request failed
+	print_r( $response );
     echo 'There was an error attempting to access the API.';
     die();
 }
