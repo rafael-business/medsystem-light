@@ -49,6 +49,8 @@ if ( $status_code <= 202 ){
     $status  = $status_code;
     $total              = $data['total_count'];
     $total_retrieved    = count( $entries );
+
+	print_r( $entries );
 }
 else {
     //entry retrieval failed, get error information
