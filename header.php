@@ -9,8 +9,6 @@
  * @package MedSystem_-_Light
  */
 
-$date = isset($_POST['data']) ? $_POST['data'] : 'esse_mes';
-
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -57,19 +55,6 @@ $date = isset($_POST['data']) ? $_POST['data'] : 'esse_mes';
 						'container'			=> false
 					)
 				);
-				if ( is_archive() ) {
-				?>
-				<form id="filter_data" class="navbar-item" method="POST">
-					<select id="data" class="p-1" name="data">
-						<option value="todos" <?= 'todos' == $date ? 'selected' : ''; ?>><?php _e( 'all', 'medsystem-light' ); ?></option>
-						<option value="esse_mes" <?= 'esse_mes' == $date ? 'selected' : ''; ?>><?php _e( 'current month', 'medsystem-light' ); ?></option>
-						<option value="hoje" <?= 'hoje' == $date ? 'selected' : ''; ?>><?php _e( 'today', 'medsystem-light' ); ?></option>
-						<option value="ontem" <?= 'ontem' == $date ? 'selected' : ''; ?>><?php _e( 'yesterday', 'medsystem-light' ); ?></option>
-						<option value="amanha" <?= 'amanha' == $date ? 'selected' : ''; ?>><?php _e( 'tomorrow', 'medsystem-light' ); ?></option>
-					</select>
-				</form>
-				<?php
-				}
 				?>
 			</div>
 		</nav>

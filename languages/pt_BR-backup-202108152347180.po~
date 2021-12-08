@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MedSystem - Light\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-01 07:45+0000\n"
-"PO-Revision-Date: 2021-08-15 23:47+0000\n"
+"PO-Revision-Date: 2021-08-01 17:21+0000\n"
 "Last-Translator: Rafael dos Santos\n"
 "Language-Team: Português do Brasil\n"
 "Language: pt_BR\n"
@@ -132,14 +132,14 @@ msgstr ""
 #, php-format
 msgctxt "post author"
 msgid "by %s"
-msgstr "por %s"
+msgstr ""
 
 #. %s: post date.
 #: inc/template-tags.php:30
 #, php-format
 msgctxt "post date"
 msgid "Posted on %s"
-msgstr "Enviado em %s"
+msgstr ""
 
 #. 1: list of categories.
 #: inc/template-tags.php:66

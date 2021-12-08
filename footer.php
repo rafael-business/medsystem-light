@@ -12,6 +12,21 @@
 ?>
 	<div class="is-fab has-content-end">
 		<a  
+			id="data_filter" 
+			class="button is-warning is-rounded btn-fab has-tooltip-arrow" 
+			data-tooltip="Filtrar por Data" 
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+			  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+			  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+			  <circle cx="18" cy="18" r="4" />
+			  <path d="M15 3v4" />
+			  <path d="M7 3v4" />
+			  <path d="M3 11h16" />
+			  <path d="M18 16.496v1.504l1 1" />
+			</svg>
+		</a>
+		<a  
 			id="btn-add-<?php _e( post_type_archive_title() ); ?>" 
 			class="button is-primary is-rounded btn-fab has-tooltip-arrow add" 
 			data-tooltip="<?php _e( 'Add New', 'medsystem-light' ); ?>" 

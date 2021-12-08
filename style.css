@@ -266,7 +266,7 @@ button:-moz-focusring,
  * Correct the padding in Firefox.
  */
 fieldset {
-	padding: 0.35em 0.75em 0.625em;
+	
 }
 
 /**
@@ -986,14 +986,18 @@ textarea {
 }
 
 form#filter_data {
-    display: inline-block;
+    display: block;
 }
 
+
 form#filter_data [name=data] {
-	font-weight: 600;
-	cursor: pointer;
-	margin-top: .08rem;
-	border-radius: 3px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: .75rem 0;
+    border: none;
+    border-bottom: 1px solid #CCC;
+    outline: none;
+    padding: .2rem;
 }
 
 .is-fab {
@@ -1006,9 +1010,10 @@ form#filter_data [name=data] {
 .has-content-end {
 	display: flex;
 	justify-content: flex-end;
+	flex-direction: column;
 }
 
-.icon.icon-tabler.icon-tabler-plus {
+.is-fab.has-content-end .icon.icon-tabler {
 	width: 56px;
 	height: 56px;
 }
@@ -1016,6 +1021,7 @@ form#filter_data [name=data] {
 .btn-fab {
 	width: 56px;
 	height: 56px;
+	margin-top: 6px;
 }
 
 .form-in-popup .button .icon {
@@ -1114,6 +1120,119 @@ span.required {
 .name-list.tags .tag {
     margin-bottom: .25rem !important;
     vertical-align: top;
+}
+
+.add-paciente {
+	display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+}
+
+.add-paciente legend {
+    padding: 12px 5px 16px calc( 1% - 5px );
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.add-paciente .field {
+    flex: 1 0 13%;
+    padding: 1%;
+    border-top: 1px solid #CCC;
+    border-right: 1px solid #CCC;
+    margin: 0;
+}
+
+.add-paciente .field.dt_exame, 
+.add-paciente .field:last-child {
+	border-right: none;
+}
+
+.add-paciente .field.cpf {
+    
+}
+
+.add-paciente .field.nome {
+    flex: 1 0 32%;
+}
+
+.add-paciente .field label {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.add-paciente .field input, 
+.add-paciente .field select, 
+.add-paciente .field .select {
+	width: 100%;
+}
+
+.add-paciente legend .icon.icon-tabler {
+	width: 20px;
+	height: 20px;
+	vertical-align: bottom;
+}
+
+/**
+ * Single Medical Report
+ */
+.medical_report .entry-header, 
+.medical_report .entry-footer {
+	background-color: #363636;
+	color: white;
+}
+
+.medical_report .entry-header .container, 
+.medical_report .entry-footer .container {
+	padding: 10px 0;
+}
+
+.medical_report .entry-header {
+	border-top: 1px solid rgba( 255, 255, 255, .1 );
+}
+
+.medical_report .entry-footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+.medical_report .entry-header .top {
+	display: flex;
+	line-height: 13px;
+}
+
+.medical_report .entry-header .top div {
+	flex: 1;
+}
+
+.medical_report .entry-header .top .paciente {
+    display: table;
+}
+
+.medical_report .entry-header .top .paciente span {
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 0;
+}
+
+.medical_report .entry-header .top .actions {
+
+}
+
+.medical_report .entry-header .top .actions a, 
+.medical_report .entry-header .top .actions a svg {
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+}
+
+.medical_report .entry-header .top .actions select {
+    display: inline-block;
+    vertical-align: top;
+    padding: 3px 12px 3px 6px;
+    margin-left: 12px;
+    border-radius: 3px;
 }
 
 /**
