@@ -22,7 +22,7 @@ $method  = 'GET';
 $route = 'forms/6/entries';
 $expires = strtotime( '+60 mins' );
 $string_to_sign = sprintf( '%s:%s:%s:%s', $api_key, $method, $route, $expires );
-$sig = self::calculate_signature( $string_to_sign, $private_key );
+$sig = calculate_signature( $string_to_sign, $private_key );
  
 $url = $base_url . $route . '?api_key=' . $api_key . '&signature=' . $sig . '&expires=' . $expires;
  
