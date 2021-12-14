@@ -9,6 +9,8 @@
 
 get_header();
 
+add_filter( 'https_ssl_verify', '__return_false' );
+
 function calculate_signature( $string, $private_key ) {
     $hash = hash_hmac( 'sha1', $string, $private_key, true );
     $sig = rawurlencode( base64_encode( $hash ) );
@@ -24,13 +26,12 @@ $expires = strtotime( '+60 mins' );
 $string_to_sign = sprintf( '%s:%s:%s:%s', $api_key, $method, $route, $expires );
 $sig = calculate_signature( $string_to_sign, $private_key );
  
-$url = $base_url . $route . '?api_key=' . $api_key . '&signature=' . $sig . '&expires=' . $expires;
+$url = $base_url . $route . '?api_key=' . $api_key . '&signature=' . $sig . '&expires=' . $expires . '&paging[page_size]=25&paging[offset]=1';
  
 $response = wp_remote_request( $url, array('method' => 'GET' ) );
  
 if ( wp_remote_retrieve_response_code( $response ) != 200 || ( empty( wp_remote_retrieve_body( $response ) ) ) ){
     //http request failed
-	print_r( $response );
     echo 'There was an error attempting to access the API.';
     die();
 }
@@ -51,7 +52,9 @@ if ( $status_code <= 202 ){
     $total              = $data['total_count'];
     $total_retrieved    = count( $entries );
 
-	print_r( $entries );
+	//echo '<code>';
+	//print_r( $entries );
+	//echo '</code>';
 }
 else {
     //entry retrieval failed, get error information
@@ -76,56 +79,23 @@ else {
 		<table>
 			<thead>
 				<tr>
-					<th>Teste</th>
+					<th>Exame</th>	
+					<th>Paciente</th>
+					<th>Status</th>
 				</tr>
 			</thead>
 			<tbody>
+				<?php 
+				foreach ( $entries as $entry ) : ?>
 				<tr>
-					<td>Opa</td>
+					<td><?= $entry[21] ?></td>	
+					<td><?= $entry[6] ?></td>
+					<td><?= $entry[23] ?></td>
 				</tr>
+				<?php 
+				endforeach; ?>
 			</tbody>
 		</table>
-
-		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha1.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
-		<script type="text/javascript">
-			function CalculateSig(stringToSign, privateKey){
-				//calculate the signature needed for authentication
-				var hash = CryptoJS.HmacSHA1(stringToSign, privateKey);
-				var base64 = hash.toString(CryptoJS.enc.Base64);
-				return encodeURIComponent(base64);
-			}
-		
-			//set variables
-			var d = new Date;
-			var expiration = 3600; // 1 hour,
-			var unixtime = parseInt(d.getTime() / 1000);
-			var future_unixtime = unixtime + expiration;
-			var publicKey = "977c815ee8";
-			var privateKey = "2b98e9a066b4813";
-			var method = "GET";
-			var route = "forms/6/entries";
-		
-			stringToSign = publicKey + ":" + method + ":" + route + ":" + future_unixtime;
-			sig = CalculateSig(stringToSign, privateKey);
-			var url = 'https://telemedic.top/gravityformsapi/' + route + '?api_key=' + publicKey + '&signature=' + sig + '&expires=' + future_unixtime;
-			$.get(url, function(data, textStatus)
-			{
-				//get the data from the api
-				if ( data.status != 200 || ( typeof( data ) != 'object' ) ) {
-					//http request failed
-					document.write( 'There was an error attempting to access the API - ' + data.status + ': ' + data.response );
-					return;
-				}
-				response          = data.response;
-				entries           = response.entries; //entries is a collection of Entry objects
-				total_count       = response.total_count;
-
-				console.log( entries );
-			});
-		
-		</script>
 
 	</main>
 
